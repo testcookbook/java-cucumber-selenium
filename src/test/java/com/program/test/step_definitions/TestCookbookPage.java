@@ -17,7 +17,7 @@ public class TestCookbookPage {
     driver = Hooks.driver;
   }
 
-  @Given("^Given I visit Test Cookbook website$")
+  @Given("^I visit Test Cookbook website$")
     public void i_visit_Test_Cookbook_website() throws Throwable {
       driver.get("http://www.testcookbook.com");
     }
