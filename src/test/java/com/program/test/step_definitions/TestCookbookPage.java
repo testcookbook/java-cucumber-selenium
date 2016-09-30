@@ -17,8 +17,8 @@ public class TestCookbookPage {
     driver = Hooks.driver;
   }
 
-  @Given("^I visit Test Cookbook Website$")
-    public void i_visit_Google() throws Throwable {
+  @Given("^Given I visit Test Cookbook website$")
+    public void i_visit_Test_Cookbook_website() throws Throwable {
       driver.get("http://www.testcookbook.com");
     }
 
@@ -26,6 +26,5 @@ public class TestCookbookPage {
     public void i_see_title_Google() throws Throwable {
       assertTrue(driver.getTitle().contains("Test Cookbook"));
     }
-
 
 }
