@@ -6,7 +6,7 @@ addons:
 before_script:
   - export CHROME_BIN=chromium-browser
   - "export DISPLAY=:99.0"
-  - "export BROWSER=chrome"
+  - "export BROWSER=oldfirefox"
   - "sh -e /etc/init.d/xvfb start"
   - sleep 3 # give xvfb some time to start
 script: mvn test
