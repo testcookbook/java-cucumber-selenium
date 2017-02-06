@@ -27,14 +27,22 @@ public class Hooks{
      */
     public void openBrowser() throws MalformedURLException {
         String browser = System.getenv("BROWSER");
-
         if (browser.equals("chrome")) {
+            ChromeDriverManager.getInstance().setup();
+            driver = new ChromeDriver();
+        } else if (browser.equals("firefox")) {
+            FirefoxDriverManager.getInstance().setup();
+            driver = new FirefoxDriver();
+        } else {
+            driver = new FirefoxDriver();
+        }
+/*        if (browser.equals("chrome")) {
             ChromeDriverManager.getInstance().setup();
             driver = new ChromeDriver();
         } else {
             FirefoxDriverManager.getInstance().setup();
             driver = new FirefoxDriver();
-        }
+        }*/
         driver.manage().deleteAllCookies();
         driver.manage().window().maximize();
     }
