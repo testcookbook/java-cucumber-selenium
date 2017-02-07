@@ -12,13 +12,29 @@ import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
+
 import cucumber.api.Scenario;
 import cucumber.api.java.After;
 import cucumber.api.java.Before;
 
+import java.net.URL;
+
 public class Hooks{
     public static WebDriver driver;
 
+    public static void sauceConfig() throws Exception {
+        String username = System.getenv("SAUCE_USER");
+        String apikey = System.getenv("SAUCE_KEY");
+        String url = "https://" + username + ":" + apikey + "@ondemand.saucelabs.com:443/wd/hub";
+
+        DesiredCapabilities caps = DesiredCapabilities.chrome();
+        caps.setCapability("platform", "Linux");
+        caps.setCapability("version", "latest");
+
+        driver = new RemoteWebDriver(new URL(url), caps);
+    }
 
     @Before
     /**
@@ -33,16 +49,16 @@ public class Hooks{
         } else if (browser.equals("firefox")) {
             FirefoxDriverManager.getInstance().setup();
             driver = new FirefoxDriver();
+        } else if (browser.equals("sauce")) {
+            try {
+                sauceConfig();
+            } catch(Exception e) {
+
+            }
         } else {
             driver = new FirefoxDriver();
         }
-/*        if (browser.equals("chrome")) {
-            ChromeDriverManager.getInstance().setup();
-            driver = new ChromeDriver();
-        } else {
-            FirefoxDriverManager.getInstance().setup();
-            driver = new FirefoxDriver();
-        }*/
+
         driver.manage().deleteAllCookies();
         driver.manage().window().maximize();
     }
