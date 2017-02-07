@@ -32,6 +32,8 @@ public class Hooks{
         DesiredCapabilities caps = DesiredCapabilities.chrome();
         caps.setCapability("platform", "Linux");
         caps.setCapability("version", "latest");
+        caps.setCapability("name", "Java Cucumber Test");
+        caps.setCapability("build", "Java Cucumber Test Build");
 
         driver = new RemoteWebDriver(new URL(url), caps);
     }
