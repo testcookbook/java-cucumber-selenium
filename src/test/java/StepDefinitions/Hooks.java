@@ -1,4 +1,4 @@
-package step_definitions;
+package StepDefinitions;
 
 import java.net.MalformedURLException;
 
@@ -45,22 +45,24 @@ public class Hooks{
      */
     public void openBrowser() throws MalformedURLException {
         String browser = System.getenv("BROWSER");
-        if (browser.equals("chrome")) {
-            ChromeDriverManager.getInstance().setup();
-            driver = new ChromeDriver();
-        } else if (browser.equals("firefox")) {
-            FirefoxDriverManager.getInstance().setup();
-            driver = new FirefoxDriver();
-        } else if (browser.equals("sauce")) {
-            try {
-                sauceConfig();
-            } catch(Exception e) {
-
-            }
-        } else {
-            driver = new FirefoxDriver();
+        if (browser == null) {
+            browser="firefox";
         }
-
+        switch (browser) {
+            case "chrome":
+                ChromeDriverManager.getInstance().setup();
+                driver = new ChromeDriver();
+                break;
+            case "sauce":
+                try {
+                    sauceConfig();
+                } catch(Exception e) {
+                    System.out.println(e.getMessage());
+                }
+            default:
+                FirefoxDriverManager.getInstance().setup();
+                driver = new FirefoxDriver();
+        }
         driver.manage().deleteAllCookies();
         driver.manage().window().maximize();
     }

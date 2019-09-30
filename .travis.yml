@@ -1,12 +1,9 @@
 language: java
 jdk:
-  - oraclejdk8
+  - openjdk8
 addons:
   firefox: "latest"
-before_script:
-  #- export CHROME_BIN=chromium-browser
-  - "export DISPLAY=:99.0"
-  - "export BROWSER=sauce"
-  - "sh -e /etc/init.d/xvfb start"
-  - sleep 3 # give xvfb some time to start
+env:
+  global:
+    - MOZ_HEADLESS=1
 script: mvn test

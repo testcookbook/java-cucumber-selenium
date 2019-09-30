@@ -1,4 +1,4 @@
-package step_definitions;
+package StepDefinitions;
 
 import static org.junit.Assert.assertTrue;
 
@@ -13,7 +13,6 @@ public class TestCookbookPage {
   public WebDriver driver;
 
   public TestCookbookPage() {
-
     driver = Hooks.driver;
   }
 
